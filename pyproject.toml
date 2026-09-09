@@ -1,0 +1,16 @@
+[project]
+name = "maths-for-programming-5c"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "matplotlib>=3.11.1",
+    "nbformat>=5.11.1",
+    "numpy>=2.5.3",
+    "pypdf>=6.18.0",
+    "scipy>=1.18.1",
+]
+
+[dependency-groups]
+dev = [
+    "flake8>=7.3.0",
+]
