@@ -1,17 +1,9 @@
 """Сборка ноутбука «Листок 1» из ячеек с помощью nbformat."""
 
+from shared import cells, code, md
 import nbformat as nbf
 
 nb = nbf.v4.new_notebook()
-cells = []
-
-
-def md(src):
-    cells.append(nbf.v4.new_markdown_cell(src))
-
-
-def code(src):
-    cells.append(nbf.v4.new_code_cell(src))
 
 
 md(r"""# Листок № 1. СЛАУ, матрицы, квадратичные формы
