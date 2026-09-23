@@ -64,6 +64,15 @@ with tempfile.TemporaryDirectory() as tmp:
             nb = replace_gifs(nb)
             exporter = HTMLExporter()
             html, _ = exporter.from_notebook_node(nb)
+            # фикс текстового слоя PDF: без принудительного DejaVu Sans
+            # Chrome подставляет в ToUnicode латинские гомоглифы (ĸ вместо
+            # кириллической к), ломая поиск и копирование по русски
+            css = (
+                "<style>body, div, span, p, li, h1, h2, h3, h4 "
+                '{ font-family: "DejaVu Sans", sans-serif !important; }'
+                "</style>"
+            )
+            html = html.replace("</head>", css + "</head>")
             html_path = os.path.join(tmp, f"{name}.html")
             with open(html_path, "w", encoding="utf-8") as f:
                 f.write(html)
