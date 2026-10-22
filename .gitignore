@@ -45,3 +45,7 @@ coverage/
 *.out
 *.toc
 *.synctex.gz
+
+.omp/plans
+.omp/cache
+.omp/logs
