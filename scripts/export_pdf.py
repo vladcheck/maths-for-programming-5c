@@ -66,10 +66,15 @@ with tempfile.TemporaryDirectory() as tmp:
             html, _ = exporter.from_notebook_node(nb)
             # фикс текстового слоя PDF: без принудительного DejaVu Sans
             # Chrome подставляет в ToUnicode латинские гомоглифы (ĸ вместо
-            # кириллической к), ломая поиск и копирование по русски
+            # кириллической к), ломая поиск и копирование по русски.
+            # Код использует Fira Code, формулы MathJax — собственный шрифт TeX.
             css = (
-                "<style>body, div, span, p, li, h1, h2, h3, h4 "
+                "<style>"
+                "@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');"
+                "body, p, li, h1, h2, h3, h4, .text_cell_render, .output_text pre "
                 '{ font-family: "DejaVu Sans", sans-serif !important; }'
+                ".input_area pre, .highlight pre, code, pre.code "
+                '{ font-family: "Fira Code", "DejaVu Sans Mono", monospace !important; }'
                 "</style>"
             )
             html = html.replace("</head>", css + "</head>")
